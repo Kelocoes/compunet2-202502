@@ -1,1 +1,2 @@
-# compunet2-202502
+# Repositorio del curso de Computación en Internet 2
+Universidad Icesi

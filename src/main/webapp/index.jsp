@@ -1,12 +1,13 @@
 <%@ page import="org.springframework.context.ApplicationContext" %>
-<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="com.example.HolaMundo" %>
-<%@ page import="com.example.service.GameService" %>
-<%@ page import="java.util.List" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="com.example.config.AppConfig" %>
+<%@ page import="com.example.service.IUserService" %>
+<%@ page import="com.example.model.User" %>
 
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Spring Example</title>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css">
 </head>
@@ -15,28 +16,21 @@
     
     <%
         // Crear el contexto de Spring
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        
-        // Obtener el bean
-        HolaMundo hola = (HolaMundo) context.getBean("HolaMundo");
-        
-        // Obtener el mensaje del bean
-        String mensaje = hola.getMensaje();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        GameService gameService = (GameService) context.getBean("GameService");
-        List<String> juegos = gameService.getGames();
+        // Obtener el bean
+        IUserService userService = context.getBean(IUserService.class);
+
+        User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
+        User savedUser = userService.save(initUser);
     %>
     
-    <p><%= mensaje %></p>
-
+    <p>Usuario guardado:</p>
     <ul>
-        <%
-            for (String juego : juegos) {
-        %>
-            <li><%= juego %></li>
-        <%
-            }
-        %>
+        <li>ID: <%= savedUser.getId() %></li>
+        <li>Nombre: <%= savedUser.getUsername() %></li>
+        <li>Email: <%= savedUser.getEmail() %></li>
+        <li>Biografía: <%= savedUser.getBio() %></li>
     </ul>
 </body>
 </html>

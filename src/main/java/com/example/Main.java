@@ -1,23 +1,33 @@
 package com.example;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.example.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
+import com.example.model.User;
+import com.example.service.IUserService;
+
+import jakarta.annotation.PostConstruct;
+
+@Configuration
+@ComponentScan(basePackages = "com.example")
 public class Main {
+
+    @Autowired
+    IUserService userService;
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        
-        HolaMundo holaMundo = (HolaMundo) context.getBean("HolaMundo");
-        System.out.println(holaMundo.getMensaje());
+        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+    }
 
-        GameService gameService = (GameService) context.getBean("GameService");
-        System.out.println("Available games: " + gameService.getGames());
+    @PostConstruct
+    public void init() {
 
-        GameService gameService1 = (GameService) context.getBean("GameService");
-        
-        System.out.println("Are gameService1 and gameService2 different instances? " + (gameService != gameService1));
+        User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
 
-        ((ClassPathXmlApplicationContext) context).close();
+        User savedUser = userService.save(initUser);
+
+        System.out.println("Usuario guardado: " + savedUser);
     }
 }

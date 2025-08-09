@@ -13,5 +13,7 @@ public class Main {
 
         GameService gameService = (GameService) context.getBean("GameService");
         System.out.println("Available games: " + gameService.getGames());
+
+        ((ClassPathXmlApplicationContext) context).close();
     }
 }

@@ -5,7 +5,7 @@
     <bean id="HolaMundo" class="com.example.HolaMundo">
         <property name="mensaje" value="Hola Mundo spring!!!" />
     </bean>
-    <bean id="GameRepository" class="com.example.repository.GameRepository">
+    <bean id="GameRepository" class="com.example.repository.GameRepository" init-method="init" destroy-method="destroy">
     </bean>
     <!-- Inyección de dependencias por constructor -->
     <!-- <bean id="GameService" class="com.example.service.GameService"> 

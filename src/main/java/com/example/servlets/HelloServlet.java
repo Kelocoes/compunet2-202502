@@ -1,9 +1,11 @@
-package com.example;
+package com.example.servlets;
 
 import java.io.*;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.example.HolaMundo;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.ServletException;

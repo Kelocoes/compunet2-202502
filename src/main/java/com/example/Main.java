@@ -14,6 +14,10 @@ public class Main {
         GameService gameService = (GameService) context.getBean("GameService");
         System.out.println("Available games: " + gameService.getGames());
 
+        GameService gameService1 = (GameService) context.getBean("GameService");
+        
+        System.out.println("Are gameService1 and gameService2 different instances? " + (gameService != gameService1));
+
         ((ClassPathXmlApplicationContext) context).close();
     }
 }

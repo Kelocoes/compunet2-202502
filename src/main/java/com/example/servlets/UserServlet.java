@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Crear el contexto de Spring
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) getServletContext().getAttribute("springContext");
 
         // Obtener el bean
         IUserService userService = context.getBean(IUserService.class);
@@ -33,7 +33,6 @@ public class UserServlet extends HttpServlet {
         out.println("<p> Usuario: " + savedUser.getUsername() + "</p>");
         out.println("</body></html>");
 
-        context.close();
     }
 
     public void destroy() {

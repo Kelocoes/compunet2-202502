@@ -28,7 +28,8 @@ public class UserServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>Hola Mundo desde Servlet</h1>");
-        out.println("<p>Usuario registrado: </p>");
+        out.println("<p>Usuario encontrado! </p>");
+        out.println("<p> Id: " + savedUser.getId() + "</p>");
         out.println("<p> Usuario: " + savedUser.getUsername() + "</p>");
         out.println("</body></html>");
 

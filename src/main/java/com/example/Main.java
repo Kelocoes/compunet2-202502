@@ -24,10 +24,10 @@ public class Main {
     @PostConstruct
     public void init() {
 
-        User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
+        // User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
 
-        User savedUser = userService.save(initUser);
+        // User savedUser = userService.save(initUser);
 
-        System.out.println("Usuario guardado: " + savedUser);
+        // System.out.println("Usuario guardado: " + savedUser);
     }
 }

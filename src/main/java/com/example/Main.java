@@ -5,6 +5,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import com.example.model.User;
 import com.example.service.IUserService;
@@ -13,6 +14,7 @@ import jakarta.annotation.PostConstruct;
 
 @Configuration
 @ComponentScan(basePackages = "com.example")
+@PropertySource("classpath:application.properties")
 public class Main {
 
     @Autowired
@@ -24,10 +26,10 @@ public class Main {
     @PostConstruct
     public void init() {
 
-        // User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
+        User initUser = new User(1L, "kelocoes", "kevin.rodriguez109@gmail.com", "Mi biografía");
 
-        // User savedUser = userService.save(initUser);
+        User savedUser = userService.save(initUser);
 
-        // System.out.println("Usuario guardado: " + savedUser);
+        System.out.println("Usuario guardado: " + savedUser);
     }
 }

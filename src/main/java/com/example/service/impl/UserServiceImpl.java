@@ -1,5 +1,7 @@
 package com.example.service.impl;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +16,10 @@ public class UserServiceImpl implements IUserService{
 
     private IUserRepository userRepository;
 
-    public UserServiceImpl(IUserRepository userRepository) {
+    @Value("#{'prod'.equals('${app.environment}')}")
+    private boolean isProduction;
+
+    public UserServiceImpl(@Qualifier("userRepositoryImpl2") IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

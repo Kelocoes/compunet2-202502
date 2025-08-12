@@ -1,0 +1,10 @@
+com\example\servlets\ServletTest.class
+com\example\model\Game.class
+com\example\services\IGameService.class
+com\example\beans\BeanA.class
+com\example\services\impl\GameServiceImpl.class
+com\example\MainApplication.class
+com\example\repository\impl\GameRepositoryImpl.class
+com\example\servlets\AppServlet.class
+com\example\repository\IGameRepository.class
+com\example\servlets\ReportServlet.class

@@ -9,6 +9,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 import com.games.back.model.User;
+import com.games.back.services.IGameService;
 import com.games.back.services.IUserService;
 
 import jakarta.annotation.PostConstruct;
@@ -18,6 +19,9 @@ public class BackApplication {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IGameService gameService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackApplication.class, args);
@@ -58,6 +62,13 @@ public class BackApplication {
         users.forEach(user -> {
             System.out.println(user.toString());
         });
+
+        // Transactional Ejemplo
+        try {
+            gameService.removeDefaultGames();
+        } catch (Exception e) {
+            System.out.println("Transaction rolled back due to: " + e.getMessage());
+        }
     }
 
 }

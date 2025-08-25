@@ -45,7 +45,7 @@ public class User {
     @Column(name="bio", length = 500)
     private String bio;
     @Column(name="created_at", nullable = false, updatable = false)
-    private Timestamp created_at;
+    private Timestamp createdAt;
 
     @ManyToOne
     @JoinColumn(name="role_id", nullable = false)

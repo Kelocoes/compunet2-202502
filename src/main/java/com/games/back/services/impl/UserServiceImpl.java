@@ -3,6 +3,10 @@ package com.games.back.services.impl;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.hibernate.query.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.games.back.model.User;
@@ -42,4 +46,11 @@ public class UserServiceImpl implements IUserService {
         usserRepository.deleteById(id);
     }
     
+    @Override
+    public List<User> findAllPage(int page, int size) {
+        logger.info("Fetching users for page: " + page + " with size: " + size);
+        Sort sort = Sort.by("id").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return usserRepository.findAll(pageable).toList();
+    }
 }

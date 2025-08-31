@@ -2,6 +2,8 @@ package com.games.back.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,6 +40,7 @@ public class Role {
      */
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonIgnore
     private List<User> users;
 
     // Many-to-Many relationship with Permission
@@ -51,5 +54,6 @@ public class Role {
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonIgnore
     private List<RolePermission> rolePermissions;
 }

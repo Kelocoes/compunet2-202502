@@ -10,4 +10,5 @@ public interface IUserService {
     User findById(Long id);
     User save(User user);
     void deleteById(Long id);
+    List<User> findAllPage(int page, int size);
 }

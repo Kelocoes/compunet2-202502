@@ -1,8 +1,6 @@
 package com.games.back.model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,35 +9,29 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Game {
+public class Comment {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    @Column(name = "min_players")
-    private Integer minPlayers;
-    @Column(name = "max_players")
-    private Integer maxPlayers;
-    private String category;
+
+    private String content;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn(name="created_by", nullable = false)
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "game")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name="game_id", nullable = false)
+    private Game game;
 }

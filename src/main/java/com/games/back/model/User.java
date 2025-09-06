@@ -57,4 +57,19 @@ public class User {
     @ToString.Exclude
     @JsonIgnore
     private List<Game> games;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Session> hostedSessions;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Participant> participations;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Comment> comments;
 }

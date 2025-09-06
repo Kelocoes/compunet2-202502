@@ -69,7 +69,7 @@ INSERT INTO users (username, email, password_hash, bio, created_at, role_id) VAL
 ('user35', 'user35@example.com', 'hashed_password_36', 'Standard user account', CURRENT_TIMESTAMP, 2);
 
 -- Insert sample games
-INSERT INTO game (name, description, min_players, max_players, genre, created_by) VALUES
+INSERT INTO game (name, description, min_players, max_players, category, created_by) VALUES
 ('Catan', 'A strategy game about resource management and trading.', 3, 4, 'Strategy', 2),
 ('Ticket to Ride', 'A railway-themed board game.', 2, 5, 'Family', 2),
 ('Pandemic', 'A cooperative game where players work together to stop global outbreaks.', 2, 4, 'Cooperative', 2),
@@ -80,3 +80,25 @@ INSERT INTO game (name, description, min_players, max_players, genre, created_by
 ('Splendor', 'A game about collecting gems and building developments.', 2, 4, 'Card Game', 3),
 ('Dixit', 'A storytelling game with beautifully illustrated cards.', 3, 6, 'Party', 3),
 ('King of Tokyo', 'A dice game where players compete as monsters for dominance.', 2, 6, 'Dice', 3);
+
+-- Insert sessions
+INSERT INTO session (location, date_time, status, notes, game_id, host_id) VALUES
+('Room 101', CURRENT_TIMESTAMP, 'Completed', 'Great session!', 1, 2),
+('Room 202', CURRENT_TIMESTAMP, 'Scheduled', 'Upcoming session', 2, 3),
+('Room 303', CURRENT_TIMESTAMP, 'Cancelled', 'Host unavailable', 3, 4);
+
+-- Insert participants
+INSERT INTO participant (score, position, winner, session_id, user_id) VALUES
+(100, 1, true, 1, 2),
+(80, 2, false, 1, 3),
+(120, 1, true, 2, 4),
+(90, 2, false, 2, 5),
+(70, 3, false, 2, 6);
+
+-- Insert comments
+INSERT INTO comment (content, created_at, user_id, game_id) VALUES
+('Amazing game!', CURRENT_TIMESTAMP, 2, 1),
+('Had a lot of fun!', CURRENT_TIMESTAMP, 3, 2),
+('Looking forward to the next session.', CURRENT_TIMESTAMP, 4, 3),
+('Great strategy game!', CURRENT_TIMESTAMP, 5, 1),
+('Loved the theme!', CURRENT_TIMESTAMP, 6, 2);

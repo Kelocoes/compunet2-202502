@@ -1,5 +1,6 @@
 package com.games.back.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class User {
     private String bio;
     @Column(name="created_at", nullable = false, updatable = false)
     private Timestamp createdAt;
+    private Date birthdate;
 
     @ManyToOne
     @JoinColumn(name="role_id", nullable = false)

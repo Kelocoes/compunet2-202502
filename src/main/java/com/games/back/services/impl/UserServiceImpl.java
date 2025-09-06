@@ -3,7 +3,6 @@ package com.games.back.services.impl;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.hibernate.query.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

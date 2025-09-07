@@ -6,3 +6,9 @@ Universidad Icesi
 ```bash
 mvn spring-boot:run -Dspring-boot.run.profiles=<profile>
 ```
+
+Comando para ejecutar test
+
+```bash
+mvn test
+```

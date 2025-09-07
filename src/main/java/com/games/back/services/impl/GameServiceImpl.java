@@ -41,6 +41,22 @@ public class GameServiceImpl implements IGameService {
 
     @Override
     public Game save(Game game) {
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return gameRepository.save(game);
     }
+
+    @Override
+    public List<Game> findAll() {
+        return gameRepository.findAll();
+    }
+
+    @Override
+    public Game findById(Long id) {
+        return gameRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        gameRepository.deleteById(id);
+    }
+
 }

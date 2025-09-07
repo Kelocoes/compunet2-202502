@@ -7,4 +7,7 @@ import com.games.back.model.Game;
 public interface IGameService {
     List<Game> removeDefaultGames();
     Game save(Game game);
+    List<Game> findAll();
+    Game findById(Long id);
+    void deleteById(Long id);
 }

@@ -1,9 +1,12 @@
 package com.games.back.controller;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
+import com.games.back.model.Role;
 import com.games.back.model.User;
+import com.games.back.services.IRoleService;
 import com.games.back.services.IUserService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final IUserService userService;
+    private final IRoleService roleService;
 
     @GetMapping("/findAll")
     public List<User> findAll() {
@@ -25,7 +29,7 @@ public class UserController {
 
     @GetMapping("/findAllPage")
     public List<User> findAllPage() {
-        return userService.findAllPage(0, 2);
+        return userService.findAllPage(0, 3);
     }
 
     @GetMapping("/findById")
@@ -48,5 +52,15 @@ public class UserController {
     public String deleteById() {
         userService.deleteById(2L);
         return "User with ID " + 2L + " deleted successfully.";
+    }
+
+    @GetMapping("/findByUsernameContaining")
+    public List<User> findByUsernameContaining() {
+        return userService.findByUsernameContaining("10");
+    }
+
+    @GetMapping("/findRolesWithAtLeast1Username")
+    public List<Role> findRolesWithAtLeast1Username() {
+        return roleService.findByRolesWithAtLeast1Username();
     }
 }

@@ -11,4 +11,5 @@ public interface IUserService {
     User save(User user);
     void deleteById(Long id);
     List<User> findAllPage(int page, int size);
+    List<User> findByUsernameContaining(String username);
 }

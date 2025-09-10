@@ -52,4 +52,9 @@ public class UserServiceImpl implements IUserService {
         Pageable pageable = PageRequest.of(page, size, sort);
         return usserRepository.findAll(pageable).toList();
     }
+
+    @Override
+    public List<User> findByUsernameContaining(String username) {
+        return usserRepository.findByUsernameContaining(username);
+    }
 }

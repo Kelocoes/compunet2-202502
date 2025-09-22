@@ -52,7 +52,7 @@ public class Role {
     // )
     // private List<Permission> permissions;
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     private List<RolePermission> rolePermissions;

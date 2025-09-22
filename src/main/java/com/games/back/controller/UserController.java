@@ -38,7 +38,7 @@ public class UserController {
         User newUser = new User();
         newUser.setUsername("Username");
         newUser.setEmail("email@gmail.com");
-        newUser.setPassword_hash("123456");
+        newUser.setPasswordHash("123456");
         newUser.setBio("Bio");
         newUser.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         return userService.save(newUser);

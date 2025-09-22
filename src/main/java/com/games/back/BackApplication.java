@@ -37,38 +37,38 @@ public class BackApplication {
         });
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void runAfterSetup() {
-        System.out.println("Application is ready!");
+    // @EventListener(ApplicationReadyEvent.class)
+    // public void runAfterSetup() {
+    //     System.out.println("Application is ready!");
 
-        // Guardar un nuevo usuario
-        User admin = userService.findById(1L);
+    //     // Guardar un nuevo usuario
+    //     User admin = userService.findById(1L);
 
-        // Actualizar el usuario recién creado
-        admin.setUsername("ImNotJohn96");
-        admin = userService.save(admin);
-        System.out.println("Updated User: " + admin);
+    //     // Actualizar el usuario recién creado
+    //     admin.setUsername("ImNotJohn96");
+    //     admin = userService.save(admin);
+    //     System.out.println("Updated User: " + admin);
 
-        // Borrar el usuario con ID 1L
-        try {
-            userService.deleteById(1L);
-            System.out.println("Deleted User with ID 1L");
-        } catch (Exception e) {
-            System.out.println("Error deleting User with ID 1L: " + e.getMessage());
-        }
+    //     // Borrar el usuario con ID 1L
+    //     try {
+    //         userService.deleteById(1L);
+    //         System.out.println("Deleted User with ID 1L");
+    //     } catch (Exception e) {
+    //         System.out.println("Error deleting User with ID 1L: " + e.getMessage());
+    //     }
 
-        // Listar todos los usuarios
-        List<User> users = userService.findAll();
-        users.forEach(user -> {
-            System.out.println(user.toString());
-        });
+    //     // Listar todos los usuarios
+    //     List<User> users = userService.findAll();
+    //     users.forEach(user -> {
+    //         System.out.println(user.toString());
+    //     });
 
-        // Transactional Ejemplo
-        try {
-            gameService.removeDefaultGames();
-        } catch (Exception e) {
-            System.out.println("Transaction rolled back due to: " + e.getMessage());
-        }
-    }
+    //     // Transactional Ejemplo
+    //     try {
+    //         gameService.removeDefaultGames();
+    //     } catch (Exception e) {
+    //         System.out.println("Transaction rolled back due to: " + e.getMessage());
+    //     }
+    // }
 
 }

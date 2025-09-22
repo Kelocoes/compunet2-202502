@@ -29,7 +29,7 @@ public class UserIntegrationTest {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword_hash("hashedpassword");
+        user.setPasswordHash("hashedpassword");
         user.setCreatedAt(Timestamp.valueOf("2023-01-01 00:00:00"));
         Role role = roleRepository.findById(1L).orElseThrow(() -> new RuntimeException("Role admin not found"));
         user.setRole(role);

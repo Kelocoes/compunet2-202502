@@ -48,7 +48,7 @@ public class UserServiceTest {
         user.setId(null);
         user.setUsername("testuser");
         user.setEmail("testuser@example.com");
-        user.setPassword_hash("hashedpassword");
+        user.setPasswordHash("hashedpassword");
         user.setCreatedAt(Timestamp.valueOf("2023-01-01 00:00:00"));
         user.setRole(role);
 
@@ -56,7 +56,7 @@ public class UserServiceTest {
         savedUser.setId(10L);
         savedUser.setUsername("testuser");
         savedUser.setEmail("testuser@example.com");
-        savedUser.setPassword_hash("hashedpassword");
+        savedUser.setPasswordHash("hashedpassword");
         savedUser.setCreatedAt(Timestamp.valueOf("2023-01-01 00:00:00"));
         savedUser.setRole(role);
     }

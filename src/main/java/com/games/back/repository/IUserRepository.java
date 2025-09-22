@@ -20,7 +20,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsernameEquals(String username);
 
-    List<User> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     List<User> findByUsernameContaining(String username);
 

@@ -2,6 +2,8 @@ package com.games.back.controller.mvc;
 
 import java.sql.Timestamp;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,8 @@ public class UserMVCController {
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("users", userService.findAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth.getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
         return "users/list";
     }
 

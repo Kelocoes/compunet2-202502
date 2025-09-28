@@ -2,6 +2,7 @@ package com.games.back.controller.mvc;
 
 import java.sql.Timestamp;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class UserMVCController {
     private final IRoleService roleService;
     
     @GetMapping
+    @PreAuthorize("hasAuthority('view-user')")
     public String getAll(Model model) {
         model.addAttribute("users", userService.findAll());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -36,6 +38,7 @@ public class UserMVCController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAuthority('create-user')")
     public String addUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
@@ -44,6 +47,7 @@ public class UserMVCController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('create-user')")
     public String addUser(@ModelAttribute User user) {
         user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         userService.save(user);
@@ -51,6 +55,7 @@ public class UserMVCController {
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('update-user')")
     public String editUserForm(@RequestParam Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("actualUser", user);
@@ -59,12 +64,14 @@ public class UserMVCController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('update-user')")
     public String editUser(@ModelAttribute("actualUser") User user) {
         userService.save(user);
         return "redirect:/mvc/users";
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('delete-user')")
     public String deleteUser(@RequestParam Long id) {
         userService.deleteById(id);
         return "redirect:/mvc/users";

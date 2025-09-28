@@ -8,12 +8,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.games.back.security.CustomUserDetailsService;
+import com.games.back.security.filters.CustomAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class WebSecurityConfig {
+
+    @Bean
+    public CustomAuthenticationFilter customAuthenticationFilter() {
+        return new CustomAuthenticationFilter();
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
@@ -27,6 +35,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+            .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/mvc/public/**").permitAll()
                 .requestMatchers("/mvc/auth/login", "/css/**", "/js/**").permitAll()

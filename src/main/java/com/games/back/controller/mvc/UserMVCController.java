@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,6 +38,14 @@ public class UserMVCController {
         return "users/list";
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('view-user') or #id == authentication.principal.user.id")
+    public String getById(@PathVariable Long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "users/detail";
+    }
+
     @GetMapping("/add")
     @PreAuthorize("hasAuthority('create-user')")
     public String addUserForm(Model model) {
@@ -55,7 +64,7 @@ public class UserMVCController {
     }
 
     @GetMapping("/edit")
-    @PreAuthorize("hasAuthority('update-user')")
+    @PreAuthorize("hasAuthority('edit-user') or #id == authentication.principal.user.id")
     public String editUserForm(@RequestParam Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("actualUser", user);
@@ -64,7 +73,7 @@ public class UserMVCController {
     }
 
     @PostMapping("/edit")
-    @PreAuthorize("hasAuthority('update-user')")
+    @PreAuthorize("hasAuthority('edit-user') or #id == authentication.principal.user.id")
     public String editUser(@ModelAttribute("actualUser") User user) {
         userService.save(user);
         return "redirect:/mvc/users";

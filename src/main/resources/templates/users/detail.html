@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle de Usuario</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/components/header.css}">
+    <link rel="stylesheet" th:href="@{/css/users/list.css}">
+</head>
+<body>
+    <div th:replace="~{components/header :: header}"></div>
+    <div class="container">
+        <h2>Detalle de Usuario</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <td th:text="${user.id}">1</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td th:text="${user.username}">JohnDoe</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}">email@example.com</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td th:text="${user.bio}">Bio del usuario</td>
+            </tr>
+            <tr>
+                <th>Fecha de nacimiento</th>
+                <td th:text="${user.birthdate}">2000-01-01</td>
+            </tr>
+            <tr>
+                <th>Rol</th>
+                <td th:text="${user.role.name}">Admin</td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="@{/mvc/users/edit(id=${user.id})}">Editar</a>
+            <a th:href="@{/mvc/users/delete(id=${user.id})}">Eliminar</a>
+        </div>
+    </div>
+</body>
+</html>

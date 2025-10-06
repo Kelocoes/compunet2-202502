@@ -7,19 +7,26 @@ import com.games.back.dtos.User.UserOutDTO;
 import com.games.back.services.IUserService;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/public/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final IUserService userService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('view-user')")
     public ResponseEntity<List<UserOutDTO>> getAllUsers() {
         try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            auth.getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
             List<UserOutDTO> users = userService.findAll();
             return ResponseEntity.ok(users);
         } catch (Exception e) {

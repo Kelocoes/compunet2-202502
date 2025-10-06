@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import com.games.back.model.Role;
+import com.games.back.dtos.Role.RoleDTO;
 
 @Data
 @AllArgsConstructor
@@ -18,5 +18,5 @@ public class UserOutDTO {
     private String bio;
     private Timestamp createdAt;
     private Date birthdate;
-    private Role role;
+    private RoleDTO role;
 }

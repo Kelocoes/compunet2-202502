@@ -19,9 +19,9 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserOutDTO>> getAllUsers() {
         try {
-            List<User> users = userService.findAll();
+            List<UserOutDTO> users = userService.findAll();
             return ResponseEntity.ok(users);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(null);
@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         try {
-            User user = userService.findById(id);
+            UserOutDTO user = userService.findById(id);
             if (user != null) {
                 return ResponseEntity.ok(user);
             } else {
@@ -65,7 +65,7 @@ public class UserController {
     @GetMapping("/page")
     public ResponseEntity<?> getUsersPage(@RequestParam int page, @RequestParam int size) {
         try {
-            List<User> users = userService.findAllPage(page, size);
+            List<UserOutDTO> users = userService.findAllPage(page, size);
             return ResponseEntity.ok(users);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
@@ -75,7 +75,7 @@ public class UserController {
     @GetMapping("/username")
     public ResponseEntity<?> getUserByUsername(@RequestParam String username) {
         try {
-            User user = userService.findByUsername(username);
+            UserOutDTO user = userService.findByUsername(username);
             if (user != null) {
                 return ResponseEntity.ok(user);
             } else {

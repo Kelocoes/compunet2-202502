@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.games.back.model.User;
+import com.games.back.dtos.User.UserOutDTO;
 import com.games.back.services.IUserService;
 
 import jakarta.annotation.PostConstruct;
@@ -24,7 +24,7 @@ public class BackApplication {
     @PostConstruct
     public void init() {
         System.out.println("----- Users -----");
-        List<User> users = userService.findAll();
+        List<UserOutDTO> users = userService.findAll();
 
         users.forEach(user -> {
             System.out.println(user.toString());

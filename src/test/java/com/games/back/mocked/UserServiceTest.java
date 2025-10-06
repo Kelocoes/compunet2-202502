@@ -67,7 +67,7 @@ public class UserServiceTest {
     public void testFindAll() {
         when(userRepository.findAll()).thenReturn(Arrays.asList(savedUser));
 
-        List<User> users = userService.findAll();
+        List<UserOutDTO> users = userService.findAll();
         assertNotNull(users);
         assertTrue(users.size() >= 0);
         verify(userRepository, times(1)).findAll();
@@ -77,7 +77,7 @@ public class UserServiceTest {
     public void testFindById() {
         when(userRepository.findById(10L)).thenReturn(Optional.of(savedUser));
 
-        User fetchedUser = userService.findById(10L);
+        UserOutDTO fetchedUser = userService.findById(10L);
         assertNotNull(fetchedUser);
         assertEquals(10L, fetchedUser.getId());
         verify(userRepository, times(1)).findById(10L);
@@ -119,7 +119,7 @@ public class UserServiceTest {
         when(userRepository.findAll(any(Pageable.class)))
                 .thenReturn(new PageImpl<>(pagedList));
 
-        List<User> users = userService.findAllPage(0, 1);
+        List<UserOutDTO> users = userService.findAllPage(0, 1);
         assertNotNull(users);
         assertEquals(1, users.size());
         verify(userRepository, times(1)).findAll(any(Pageable.class));

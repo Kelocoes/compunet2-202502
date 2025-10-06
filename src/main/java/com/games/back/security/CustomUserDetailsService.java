@@ -6,17 +6,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.games.back.model.User;
-import com.games.back.services.IUserService;
+import com.games.back.repository.IUserRepository;
 
 public class CustomUserDetailsService implements UserDetailsService{
 
     @Autowired
-    private IUserService userService;
+    private IUserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            User user = userService.findByUsername(username);
+            User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
             return new CustomUserDetails(user);
         } catch (RuntimeException ex) {
             throw new UsernameNotFoundException("User not found with username: " + username, ex);

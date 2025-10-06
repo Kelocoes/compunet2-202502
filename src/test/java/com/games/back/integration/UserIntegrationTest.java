@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.games.back.services.IUserService;
-import com.games.back.model.User;
 import com.games.back.model.Role;
 import com.games.back.dtos.User.UserInDTO;
 import com.games.back.dtos.User.UserOutDTO;
@@ -43,7 +42,7 @@ public class UserIntegrationTest {
         UserInDTO user = buildValidUser("findalluser", "findalluser@example.com");
         userService.save(user);
 
-        List<User> users = userService.findAll();
+        List<UserOutDTO> users = userService.findAll();
         assertNotNull(users);
         assertTrue(users.size() >= 0);
     }
@@ -53,7 +52,7 @@ public class UserIntegrationTest {
         UserInDTO user = buildValidUser("testuser", "testuser@example.com");
         UserOutDTO saved = userService.save(user);
 
-        User fetchedUser = userService.findById(saved.getId());
+        UserOutDTO fetchedUser = userService.findById(saved.getId());
         assertNotNull(fetchedUser);
         assertEquals(saved.getId(), fetchedUser.getId());
     }
@@ -85,7 +84,7 @@ public class UserIntegrationTest {
         UserInDTO user2 = buildValidUser("pageduser2", "pageduser2@example.com");
         userService.save(user2);
 
-        List<User> users = userService.findAllPage(0, 1);
+        List<UserOutDTO> users = userService.findAllPage(0, 1);
         assertNotNull(users);
         assertEquals(1, users.size());
     }

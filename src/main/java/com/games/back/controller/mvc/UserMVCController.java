@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.games.back.dtos.User.UserInDTO;
+import com.games.back.dtos.User.UserOutDTO;
 import com.games.back.model.User;
 import com.games.back.services.IRoleService;
 import com.games.back.services.IUserService;
@@ -40,7 +41,7 @@ public class UserMVCController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('view-user') or #id == authentication.principal.user.id")
     public String getById(@PathVariable Long id, Model model) {
-        User user = userService.findById(id);
+        UserOutDTO user = userService.findById(id);
         model.addAttribute("user", user);
         return "users/detail";
     }
@@ -64,7 +65,7 @@ public class UserMVCController {
     @GetMapping("/edit")
     @PreAuthorize("hasAuthority('edit-user') or #id == authentication.principal.user.id")
     public String editUserForm(@RequestParam Long id, Model model) {
-        User user = userService.findById(id);
+        UserOutDTO user = userService.findById(id);
         model.addAttribute("actualUser", user);
         model.addAttribute("roles", roleService.findAll());
         return "users/edit";

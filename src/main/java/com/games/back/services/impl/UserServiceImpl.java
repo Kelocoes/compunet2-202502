@@ -1,7 +1,5 @@
 package com.games.back.services.impl;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -13,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.games.back.dtos.User.UserInDTO;
 import com.games.back.dtos.User.UserOutDTO;
+import com.games.back.mappers.IUserMapper;
 import com.games.back.model.User;
 import com.games.back.repository.IUserRepository;
 import com.games.back.services.IRoleService;
@@ -28,38 +27,33 @@ public class UserServiceImpl implements IUserService {
     private final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     private final PasswordEncoder passwordEncoder;
     private final IRoleService roleService;
+    private final IUserMapper userMapper;
 
     @Override
-    public List<User> findAll() {
+    public List<UserOutDTO> findAll() {
         logger.info("Fetching all users");
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        List<UserOutDTO> userDtos = users.stream()
+                .map(userMapper::userToUserOutDto)
+                .toList();
+        return userDtos;
     }
 
     @Override
-    public User findById(Long id) {
+    public UserOutDTO findById(Long id) {
         logger.info("Fetching user with ID: " + id);
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.userToUserOutDto(user);
     }
 
     @Override
     public UserOutDTO save(UserInDTO userDto) {
         logger.info("Saving user: " + userDto);
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPasswordHash(passwordEncoder.encode(userDto.getPassword()));
-        user.setBirthdate(userDto.getBirthdate());
-        user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User user = userMapper.userInDtoToUser(userDto);
         user.setRole(roleService.findById(userDto.getRoleId()));
         User savedUser = userRepository.save(user);
-        UserOutDTO outDto = new UserOutDTO();
-        outDto.setId(savedUser.getId());
-        outDto.setUsername(savedUser.getUsername());
-        outDto.setEmail(savedUser.getEmail());
-        outDto.setBio(savedUser.getBio());
-        outDto.setCreatedAt(savedUser.getCreatedAt());
-        outDto.setBirthdate(savedUser.getBirthdate());
-        outDto.setRole(savedUser.getRole());
+        UserOutDTO outDto = userMapper.userToUserOutDto(savedUser);
         return outDto;
     }
 
@@ -70,16 +64,20 @@ public class UserServiceImpl implements IUserService {
     }
     
     @Override
-    public List<User> findAllPage(int page, int size) {
+    public List<UserOutDTO> findAllPage(int page, int size) {
         logger.info("Fetching users for page: " + page + " with size: " + size);
         Sort sort = Sort.by("id").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
-        return userRepository.findAll(pageable).toList();
+        return userRepository.findAll(pageable).stream()
+                .map(userMapper::userToUserOutDto)
+                .toList();
     }
 
     @Override
-    public User findByUsername(String username) {
+    public UserOutDTO findByUsername(String username) {
         logger.info("Fetching user with username: " + username);
-        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByUsername(username)
+            .map(userMapper::userToUserOutDto)
+            .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.games.back.dtos.User.UserInDTO;
 import com.games.back.model.User;
 import com.games.back.services.IRoleService;
 import com.games.back.services.IUserService;
@@ -57,8 +58,7 @@ public class UserMVCController {
 
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('create-user')")
-    public String addUser(@ModelAttribute User user) {
-        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+    public String addUser(@ModelAttribute UserInDTO user) {
         userService.save(user);
         return "redirect:/mvc/users";
     }
@@ -74,7 +74,7 @@ public class UserMVCController {
 
     @PostMapping("/edit")
     @PreAuthorize("hasAuthority('edit-user') or #id == authentication.principal.user.id")
-    public String editUser(@ModelAttribute("actualUser") User user) {
+    public String editUser(@ModelAttribute("actualUser") UserInDTO user) {
         userService.save(user);
         return "redirect:/mvc/users";
     }

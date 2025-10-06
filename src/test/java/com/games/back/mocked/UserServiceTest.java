@@ -2,6 +2,8 @@ package com.games.back.mocked;
 
 import com.games.back.model.User;
 import com.games.back.model.Role;
+import com.games.back.dtos.User.UserInDTO;
+import com.games.back.dtos.User.UserOutDTO;
 import com.games.back.repository.IUserRepository;
 import com.games.back.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,7 +87,15 @@ public class UserServiceTest {
     public void testSave() {
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        User result = userService.save(user);
+        UserInDTO userDto = new UserInDTO();
+        userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword("password");
+        userDto.setBio(null);
+        userDto.setBirthdate(null);
+        userDto.setRoleId(role.getId());
+
+        UserOutDTO result = userService.save(userDto);
         assertNotNull(result);
         assertNotNull(result.getId());
         assertEquals("testuser", result.getUsername());

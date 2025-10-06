@@ -9,6 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 import com.games.back.services.IUserService;
 import com.games.back.model.User;
 import com.games.back.model.Role;
+import com.games.back.dtos.User.UserInDTO;
+import com.games.back.dtos.User.UserOutDTO;
 import com.games.back.repository.IRoleRepository;
 import org.junit.jupiter.api.Test;
 
@@ -25,20 +27,21 @@ public class UserIntegrationTest {
     @Autowired
     private IRoleRepository roleRepository;
 
-    private User buildValidUser(String username, String email) {
-        User user = new User();
+    private UserInDTO buildValidUser(String username, String email) {
+        UserInDTO user = new UserInDTO();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPasswordHash("hashedpassword");
-        user.setCreatedAt(Timestamp.valueOf("2023-01-01 00:00:00"));
+        user.setPassword("hashedpassword");
+        user.setBio(null);
+        user.setBirthdate(null);
         Role role = roleRepository.findById(1L).orElseThrow(() -> new RuntimeException("Role admin not found"));
-        user.setRole(role);
+        user.setRoleId(role.getId());
         return user;
     }
 
     @Test
     public void testFindAll() {
-        User user = buildValidUser("findalluser", "findalluser@example.com");
+        UserInDTO user = buildValidUser("findalluser", "findalluser@example.com");
         userService.save(user);
 
         List<User> users = userService.findAll();
@@ -48,18 +51,18 @@ public class UserIntegrationTest {
 
     @Test
     public void testFindById() {
-        User user = buildValidUser("testuser", "testuser@example.com");
-        user = userService.save(user);
+        UserInDTO user = buildValidUser("testuser", "testuser@example.com");
+        UserOutDTO saved = userService.save(user);
 
-        User fetchedUser = userService.findById(user.getId());
+        User fetchedUser = userService.findById(saved.getId());
         assertNotNull(fetchedUser);
-        assertEquals(user.getId(), fetchedUser.getId());
+        assertEquals(saved.getId(), fetchedUser.getId());
     }
 
     @Test
     public void testSave() {
-        User user = buildValidUser("newuser", "newuser@example.com");
-        User savedUser = userService.save(user);
+        UserInDTO user = buildValidUser("newuser", "newuser@example.com");
+        UserOutDTO savedUser = userService.save(user);
 
         assertNotNull(savedUser);
         assertNotNull(savedUser.getId());
@@ -68,8 +71,8 @@ public class UserIntegrationTest {
 
     @Test
     public void testDeleteById() {
-        User user = buildValidUser("todelete", "todelete@example.com");
-        User retrievedUser = userService.save(user);
+        UserInDTO user = buildValidUser("todelete", "todelete@example.com");
+        UserOutDTO retrievedUser = userService.save(user);
 
         userService.deleteById(retrievedUser.getId());
         assertThrows(RuntimeException.class, () -> userService.findById(retrievedUser.getId()));
@@ -77,10 +80,10 @@ public class UserIntegrationTest {
 
     @Test
     public void testFindAllPage() {
-        User user1 = buildValidUser("pageduser1", "pageduser1@example.com");
+        UserInDTO user1 = buildValidUser("pageduser1", "pageduser1@example.com");
         userService.save(user1);
 
-        User user2 = buildValidUser("pageduser2", "pageduser2@example.com");
+        UserInDTO user2 = buildValidUser("pageduser2", "pageduser2@example.com");
         userService.save(user2);
 
         List<User> users = userService.findAllPage(0, 1);

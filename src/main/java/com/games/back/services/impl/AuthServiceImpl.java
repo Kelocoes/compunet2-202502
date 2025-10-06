@@ -11,7 +11,6 @@ import com.games.back.dtos.Auth.LoginRequestDTO;
 import com.games.back.dtos.Auth.TokenResponseDTO;
 import com.games.back.model.User;
 import com.games.back.security.CustomUserDetails;
-import com.games.back.security.CustomUserDetailsService;
 import com.games.back.services.IAuthService;
 import com.games.back.services.IJwtService;
 

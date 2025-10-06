@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 
 import com.games.back.model.User;
-import com.games.back.services.IGameService;
 import com.games.back.services.IUserService;
 
 import jakarta.annotation.PostConstruct;
@@ -19,9 +16,6 @@ public class BackApplication {
 
     @Autowired
     private IUserService userService;
-
-    @Autowired
-    private IGameService gameService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackApplication.class, args);

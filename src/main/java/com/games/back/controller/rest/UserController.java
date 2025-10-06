@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.games.back.dtos.User.UserInDTO;
 import com.games.back.dtos.User.UserOutDTO;
-import com.games.back.model.User;
 import com.games.back.services.IUserService;
 
 import lombok.RequiredArgsConstructor;

@@ -1,0 +1,32 @@
+[
+    {
+        "username": "postman_user_101",
+        "email": "postman+101@example.com",
+        "password": "Pwd12345!",
+        "roleId": 1
+    },
+    {
+        "username": "postman_user_102",
+        "email": "postman+102@example.com",
+        "password": "Pwd12345!",
+        "roleId": 2
+    },
+    {
+        "username": "postman_user_103",
+        "email": "postman+103@example.com",
+        "password": "Pwd12345!",
+        "roleId": 1
+    },
+    {
+        "username": "postman_user_104",
+        "email": "postman+104@example.com",
+        "password": "Pwd12345!",
+        "roleId": 3
+    },
+    {
+        "username": "postman_user_105",
+        "email": "postman+105@example.com",
+        "password": "Pwd12345!",
+        "roleId": 2
+    }
+]

@@ -77,18 +77,4 @@ public class UserController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
-
-    @GetMapping("/username")
-    public ResponseEntity<?> getUserByUsername(@RequestParam String username) {
-        try {
-            UserOutDTO user = userService.findByUsername(username);
-            if (user != null) {
-                return ResponseEntity.ok(user);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
-    }
 }

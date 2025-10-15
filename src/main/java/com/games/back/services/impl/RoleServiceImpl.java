@@ -20,4 +20,9 @@ public class RoleServiceImpl implements IRoleService {
     public List<Role> findAll() {
         return roleRepository.findAll();
     }
+
+    @Override
+    public Role findById(Long id) {
+        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
+    }
 }

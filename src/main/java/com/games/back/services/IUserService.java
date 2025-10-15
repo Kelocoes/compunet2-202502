@@ -2,6 +2,7 @@ package com.games.back.services;
 
 import java.util.List;
 
+import com.games.back.dto.UserInDto;
 import com.games.back.model.User;
 
 public interface IUserService {

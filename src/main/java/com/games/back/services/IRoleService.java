@@ -6,4 +6,5 @@ import com.games.back.model.Role;
 
 public interface IRoleService {
     List<Role> findAll();
+    Role findById(Long id);
 }

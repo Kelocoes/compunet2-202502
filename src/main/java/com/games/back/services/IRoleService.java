@@ -7,4 +7,6 @@ import com.games.back.model.Role;
 public interface IRoleService {
     List<Role> findAll();
     Role findById(Long id);
+    Role save(Role role);
+    void deleteById(Long id);
 }

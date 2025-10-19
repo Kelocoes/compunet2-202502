@@ -25,4 +25,14 @@ public class RoleServiceImpl implements IRoleService {
     public Role findById(Long id) {
         return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
     }
+
+    @Override
+    public Role save(Role role) {
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        roleRepository.deleteById(id);
+    }
 }

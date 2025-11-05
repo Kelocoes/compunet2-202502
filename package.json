@@ -6,8 +6,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lint": "eslint src/ --ext .ts,.tsx,.jsx --report-unused-disable-directives",
-        "lint:fix": "eslint src/ --ext .ts,.tsx,.jsx --report-unused-disable-directives --fix",
+        "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js --report-unused-disable-directives",
+        "lint:fix": "eslint src/ --ext .ts,.tsx,.jsx,.js --report-unused-disable-directives --fix",
         "preview": "npm run build && vite preview",
         "prepare": "husky",
         "format": "prettier --write .",

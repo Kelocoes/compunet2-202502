@@ -18,7 +18,7 @@ export default function LoginPage() {
 
         try {
             const response = await authService.login(loginData);
-            localStorage.setItem("token", response.token);
+            localStorage.setItem("token", response.accessToken);
             console.info("Login successful:", response);
         } catch (error) {
             console.error("Login failed:", error);

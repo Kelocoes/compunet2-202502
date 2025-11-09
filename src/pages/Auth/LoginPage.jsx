@@ -2,10 +2,12 @@ import { useRef } from "react";
 import { Container, Box, Card, CardContent, Typography, TextField, Button, Link } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 
+import authService from "../../services/authService";
+
 export default function LoginPage() {
     const formRef = useRef();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
         const loginData = {
@@ -13,6 +15,14 @@ export default function LoginPage() {
             password: formData.get("password"),
         };
         console.info("Login Data:", loginData);
+
+        try {
+            const response = await authService.login(loginData);
+            localStorage.setItem("token", response.token);
+            console.info("Login successful:", response);
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
     };
 
     return (

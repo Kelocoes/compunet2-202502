@@ -2,7 +2,6 @@ import { Box, Fab, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 
-import Header from "../../../components/Header";
 import userService from "../../../services/userService";
 import UserCard from "../../../components/UserCard";
 import CreateUserForm from "../../../components/CreateUserForm";
@@ -13,8 +12,7 @@ export default function FeedPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const users = await userService.getAll(token);
+            const users = await userService.getAll();
             setUsers(users);
         };
         fetchData();
@@ -31,7 +29,7 @@ export default function FeedPage() {
     const handleCreateUser = async (userData) => {
         console.info("Crear usuario:", userData);
         try {
-            const response = await userService.create(userData, localStorage.getItem("token"));
+            const response = await userService.create(userData);
             setUsers((prevUsers) => [...prevUsers, response]);
         } catch (error) {
             console.error("Error creating user:", error);
@@ -42,7 +40,6 @@ export default function FeedPage() {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Header />
             <Typography variant="h3" color="primary" sx={{ mt: 4, mb: 2, textAlign: "center" }}>
                 User Feed
             </Typography>

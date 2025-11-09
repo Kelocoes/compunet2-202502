@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Container, Box, Card, CardContent, Typography, TextField, Button, Link, Grid } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { Link as RouterLink } from "react-router";
 
 export default function RegisterPage() {
     const formRef = useRef();
@@ -72,7 +73,7 @@ export default function RegisterPage() {
                         <Box sx={{ textAlign: "center", mt: 2 }}>
                             <Typography variant="body2" color="text.secondary">
                                 ¿Ya tienes una cuenta?{" "}
-                                <Link underline="hover" fontWeight="bold">
+                                <Link component={RouterLink} to="/login" underline="hover" fontWeight="bold">
                                     Inicia sesión aquí
                                 </Link>
                             </Typography>

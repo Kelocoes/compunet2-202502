@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { Container, Box, Card, CardContent, Typography, TextField, Button, Link } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate, Link as RouterLink } from "react-router";
 
 import authService from "../../services/authService";
 
 export default function LoginPage() {
     const formRef = useRef();
+    const nav = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,8 +20,9 @@ export default function LoginPage() {
 
         try {
             const response = await authService.login(loginData);
-            localStorage.setItem("token", response.token);
+            localStorage.setItem("token", response.accessToken);
             console.info("Login successful:", response);
+            nav("/dashboard/feed");
         } catch (error) {
             console.error("Login failed:", error);
         }
@@ -60,7 +63,7 @@ export default function LoginPage() {
                         <Box sx={{ textAlign: "center", mt: 2 }}>
                             <Typography variant="body2" color="text.secondary">
                                 ¿No tienes una cuenta?{" "}
-                                <Link underline="hover" fontWeight="bold">
+                                <Link component={RouterLink} to="/register" underline="hover" fontWeight="bold">
                                     Regístrate aquí
                                 </Link>
                             </Typography>

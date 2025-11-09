@@ -1,0 +1,32 @@
+import { Card, CardContent, Typography, Box, Paper } from "@mui/material";
+import ChildCareIcon from "@mui/icons-material/ChildCare";
+
+export default function ChildrenProps({ children }) {
+    return (
+        <Card sx={{ maxWidth: 600, mx: "auto", mb: 3 }}>
+            <CardContent>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+                    <ChildCareIcon color="primary" />
+                    <Typography variant="h5" component="h2" color="primary">
+                        Props Children
+                    </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary" paragraph>
+                    Este componente utiliza la prop especial "children" para renderizar contenido pasado desde su componente padre.
+                </Typography>
+                <Paper
+                    elevation={2}
+                    sx={{
+                        p: 2,
+                        mt: 2,
+                        border: "2px dashed",
+                        borderColor: "primary.light",
+                        bgcolor: "background.default",
+                    }}
+                >
+                    {children}
+                </Paper>
+            </CardContent>
+        </Card>
+    );
+}

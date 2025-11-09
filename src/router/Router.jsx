@@ -1,9 +1,8 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 
 import Landing from "../pages/landing/LandingPage";
 import LoginPage from "../pages/Auth/LoginPage";
 import RegisterPage from "../pages/Auth/RegisterPage";
-import AuthLayout from "../layout/AuthLayout";
 import PropsPage from "../pages/props/PropsPage";
 import FeedPage from "../pages/dashboard/feed/FeedPage";
 

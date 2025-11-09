@@ -12,7 +12,7 @@ export default function LoginPage() {
             username: formData.get("username"),
             password: formData.get("password"),
         };
-        console.log("Login Data:", loginData);
+        console.info("Login Data:", loginData);
     };
 
     return (

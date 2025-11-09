@@ -16,7 +16,7 @@ export default function RegisterPage() {
             birthdate: formData.get("birthdate"),
             roleId: 2, // Valor por defecto
         };
-        console.log("Register Data:", registerData);
+        console.info("Register Data:", registerData);
     };
 
     return (

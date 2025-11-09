@@ -11,8 +11,8 @@ export default function ChildrenProps({ children }) {
                         Props Children
                     </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary" paragraph>
-                    Este componente utiliza la prop especial "children" para renderizar contenido pasado desde su componente padre.
+                <Typography variant="body2" color="text.secondary">
+                    Este componente utiliza la prop especial children para renderizar contenido pasado desde su componente padre.
                 </Typography>
                 <Paper
                     elevation={2}

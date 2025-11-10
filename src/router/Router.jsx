@@ -6,18 +6,22 @@ import RegisterPage from "../pages/Auth/RegisterPage";
 import PropsPage from "../pages/props/PropsPage";
 import FeedPage from "../pages/dashboard/feed/FeedPage";
 import AuthLayout from "../layout/AuthLayout";
+import ContextPage from "../pages/context/ContextPage";
+import UseContextPage from "../pages/use-context/ContextPage";
+import StoreContextPage from "../pages/store-context/ContextPage";
 
 const router = createBrowserRouter(
     [
         { path: "/login", Component: LoginPage },
         { path: "/register", Component: RegisterPage },
         { path: "/props-page", Component: PropsPage },
+        { path: "/context", Component: ContextPage },
+        { path: "/use-context", Component: UseContextPage },
+        { path: "/store-context", Component: StoreContextPage },
         {
             path: "/dashboard",
             Component: AuthLayout,
-            children: [
-                { path: "feed", Component: FeedPage },
-            ],
+            children: [{ path: "feed", Component: FeedPage }],
         },
         { path: "*", Component: Landing },
     ],

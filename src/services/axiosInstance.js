@@ -30,21 +30,21 @@ axiosInstance.interceptors.response.use(
     (error) => {
         if (error.response) {
             switch (error.response.status) {
-            case 401:
-                localStorage.removeItem("token");
-                window.location.href = "/compunet-2/login";
-                break;
-            case 403:
-                console.error("Access forbidden");
-                break;
-            case 404:
-                console.error("Resource not found");
-                break;
-            case 500:
-                console.error("Internal server error");
-                break;
-            default:
-                console.error("An error occurred:", error.response.data?.message || error.message);
+                case 401:
+                    localStorage.removeItem("token");
+                    window.location.href = "/compunet-2/login";
+                    break;
+                case 403:
+                    console.error("Access forbidden");
+                    break;
+                case 404:
+                    console.error("Resource not found");
+                    break;
+                case 500:
+                    console.error("Internal server error");
+                    break;
+                default:
+                    console.error("An error occurred:", error.response.data?.message || error.message);
             }
         } else if (error.request) {
             console.error("No response received from server");

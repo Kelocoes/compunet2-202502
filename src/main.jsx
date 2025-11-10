@@ -5,11 +5,13 @@ import { RouterProvider } from "react-router";
 import { StyledEngineProvider } from "@mui/material";
 
 import router from "./router/Router";
+import CustomSnackbar from "./components/CustomSnackbar";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <StyledEngineProvider injectFirst>
             <RouterProvider router={router} />
+            <CustomSnackbar />
         </StyledEngineProvider>
     </StrictMode>
 );

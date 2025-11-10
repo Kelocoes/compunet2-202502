@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 
 import ComponentC from "./ComponentC";
 
-export default function ComponentB({ myState, setMyState }) {
+export default function ComponentB() {
     console.info("Rendering Component B");
 
     return (
@@ -19,15 +19,15 @@ export default function ComponentB({ myState, setMyState }) {
                 <Typography variant="h5" component="h2" gutterBottom color="primary" fontWeight="bold">
                     Component B
                 </Typography>
-                <Typography variant="body1" sx={{ mb: 1 }}>
+                {/* <Typography variant="body1" sx={{ mb: 1 }}>
                     Estado actual: <strong>{myState}</strong>
-                </Typography>
+                </Typography> */}
                 <Typography variant="body2" color="text.secondary" paragraph>
                     Descripción breve de Component B.
                 </Typography>
 
                 <Box sx={{ mt: 2 }}>
-                    <ComponentC myState={myState} setMyState={setMyState} />
+                    <ComponentC />
                 </Box>
             </CardContent>
         </Card>

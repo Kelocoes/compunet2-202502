@@ -3,10 +3,14 @@ import { Card, CardContent, Typography, Button, Box } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { useStore } from "@tanstack/react-store";
 
-export default function ComponentC({ myState, setMyState }) {
+import { decrementByAmount, incrementByAmount, store } from "../../../store/store";
+
+export default function ComponentC() {
     console.info("Rendering Component C");
     const [state, setState] = useState("Estado interno!");
+    const myState = useStore(store, (store) => store.myState);
 
     return (
         <Card
@@ -36,10 +40,10 @@ export default function ComponentC({ myState, setMyState }) {
                     <Button variant="contained" color="info" fullWidth startIcon={<EditIcon />} onClick={() => setState(state + "!")}>
                         Modificar Estado Interno
                     </Button>
-                    <Button variant="contained" color="success" fullWidth startIcon={<AddCircleIcon />} onClick={() => setMyState(myState + 10)}>
+                    <Button variant="contained" color="success" fullWidth startIcon={<AddCircleIcon />} onClick={() => incrementByAmount(10)}>
                         Incrementar en 10
                     </Button>
-                    <Button variant="contained" color="warning" fullWidth startIcon={<RemoveCircleIcon />} onClick={() => setMyState(myState - 10)}>
+                    <Button variant="contained" color="warning" fullWidth startIcon={<RemoveCircleIcon />} onClick={() => decrementByAmount(10)}>
                         Decrementar en 10
                     </Button>
                 </Box>

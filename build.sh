@@ -1,5 +1,5 @@
 rm -rf dist
-npm run build:$env
+npm run build
 cp -r WEB-INF/ dist
 cd dist
-zip -r compunet#2.war *
+zip -r compunet-2.war *

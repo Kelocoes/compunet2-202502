@@ -3,6 +3,8 @@ import { Container, Card, CardContent, Typography, Button, Box } from "@mui/mate
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
+import MyContext from "../../context/myContext";
+
 import ComponentA from "./components/ComponentA";
 
 export default function UseContextPage() {
@@ -31,7 +33,9 @@ export default function UseContextPage() {
                         </Box>
 
                         <Box sx={{ mt: 4 }}>
-                            <ComponentA myState={myState} setMyState={setMyState} />
+                            <MyContext.Provider value={{ myState, setMyState }}>
+                                <ComponentA myState={myState} setMyState={setMyState} />
+                            </MyContext.Provider>
                         </Box>
                     </CardContent>
                 </Card>

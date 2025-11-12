@@ -1,4 +1,8 @@
-import { Card, CardContent, Typography, Chip, Box } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+import Box from "@mui/material/Box";
 
 export default function UserCard({ user }) {
     return (

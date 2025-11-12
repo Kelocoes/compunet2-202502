@@ -67,6 +67,12 @@ export default [
             semi: ["error", "always"],
             camelcase: "off",
             "no-console": ["error", { allow: ["info", "warn", "error"] }],
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [{ regex: "^@mui/[^/]+$" }],
+                },
+            ],
         },
     },
 ];

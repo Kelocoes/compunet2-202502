@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Card, CardContent, Typography, TextField, Button, Box } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 

@@ -1,4 +1,9 @@
-import { Container, Typography, Box, Button, Alert, Snackbar } from "@mui/material";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import { useState } from "react";
 import ScienceIcon from "@mui/icons-material/Science";
 

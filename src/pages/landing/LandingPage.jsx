@@ -1,4 +1,7 @@
-import { Container, Typography, Box, Button as MuiButton } from "@mui/material";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import MuiButton from "@mui/material/Button";
 import ScienceIcon from "@mui/icons-material/Science";
 
 import AdvancedCalculator from "./components/AdvancedCalculator";
